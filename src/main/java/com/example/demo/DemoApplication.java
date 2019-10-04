@@ -7,6 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DemoApplication {
 
 	public static void main(String[] args) {
+
+		System.setProperty("spring.devtools.restart.enabled", "true");
+		System.setProperty("spring.thymeleaf.cache", "false");
+
 		SpringApplication.run(DemoApplication.class, args);
 	}
 

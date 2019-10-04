@@ -10,6 +10,10 @@ public class HomeController {
     @GetMapping("/")
     public String home( Model model ){
 
+        model.addAttribute("active", 66);
+        model.addAttribute("decom", 33);
+        model.addAttribute("error", 443);
+
         return "home";
     }
 }

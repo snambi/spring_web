@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    <div layout:fragment="content">
+
+                        <div>
+                            <p><span></span></p>
+                            <H2>Current Status</H2>
+                            <div>
+                                <p>Number of Active stages: <span th:text="${active}"></span></p>
+                                <p>Number of Error stages: <span th:text="${error}"></span></p>
+                                <p>Number of error decomm stages: <span th:text="${decom}"></span></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
