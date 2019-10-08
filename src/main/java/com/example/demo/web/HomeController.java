@@ -14,6 +14,6 @@ public class HomeController {
         model.addAttribute("decom", 33);
         model.addAttribute("error", 443);
 
-        return "home";
+        return "home-1";
     }
 }
