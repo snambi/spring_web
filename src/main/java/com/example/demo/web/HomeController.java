@@ -14,6 +14,16 @@ public class HomeController {
         model.addAttribute("decom", 33);
         model.addAttribute("error", 443);
 
-        return "home-1";
+        return "home";
+    }
+
+    @GetMapping("/status")
+    public String status( Model model){
+
+        model.addAttribute("active", 66);
+        model.addAttribute("decom", 33);
+        model.addAttribute("error", 443);
+
+        return "status";
     }
 }

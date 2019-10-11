@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/header :: headFragment">
+    <title id="pageTitle">My World</title>
+</head>
+
+<body>
+<div class="container">
+
+    <div id="header_nav" th:replace="fragments/header :: nav_header" />
+
+</div>
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8 blog-main">
+
+            <h3 class="pb-4 mb-4 font-italic border-bottom">
+                Updates from MyStage
+            </h3>
+
+            <div class="blog-post">
+                <h2 class="blog-post-title">Status Report</h2>
+                <p class="blog-post-meta">October 11, 2019 by <a href="#">Nambi</a></p>
+
+                <div>
+                    <p>Number of Active stages: <span th:text="${active}"></span></p>
+                    <p>Number of Error stages: <span th:text="${error}"></span></p>
+                    <p>Number of error decomm stages: <span th:text="${decom}"></span></p>
+                </div>
+
+            </div><!-- /.blog-post -->
+
+            <nav class="blog-pagination">
+                <a class="btn btn-outline-primary" href="#">Older</a>
+                <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
+            </nav>
+
+        </div><!-- /.blog-main -->
+
+        <aside class="col-md-4 blog-sidebar">
+            <div class="p-4 mb-3 bg-light rounded">
+                <h4 class="font-italic">About</h4>
+                <p class="mb-0">
+                    This report provides information about <em>mystage</em> pools status.
+                    There are reports that provide daily, weekly and monthly data.
+                </p>
+            </div>
+
+            <div class="p-4">
+                <h4 class="font-italic">Elsewhere</h4>
+                <ol class="list-unstyled">
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ol>
+            </div>
+        </aside><!-- /.blog-sidebar -->
+
+    </div><!-- /.row -->
+
+</main><!-- /.container -->
+
+<footer th:replace="fragments/footer :: footerFragment">
+</footer>
+</body>
+</html>

@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
 <body>
-    <div class="container">
-        <footer>
-            <div th:fragment="footer">
-                <p>&copy; 2019 demo.com</p>
-            </div>
-        </footer>
-    </div>
+    <footer class="blog-footer fixed-bottom"  th:fragment="footerFragment">
+        <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.
+        </p>
+        <p>
+            <a href="#">Back to top</a>
+        </p>
+    </footer>
 </body>
 </html>

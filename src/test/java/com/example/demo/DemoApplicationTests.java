@@ -13,4 +13,12 @@ public class DemoApplicationTests {
 	public void contextLoads() {
 	}
 
+	@Test
+	public void toUpper(){
+		String x = "a09";
+
+		String y = x.toUpperCase();
+
+		System.out.println("x ="+ x + ", y = "+ y);
+	}
 }
