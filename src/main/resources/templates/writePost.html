@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/header :: headFragment">
+    <title id="pageTitle">My World</title>
+</head>
+
+<body>
+<div class="container">
+
+    <div id="header_nav" th:replace="fragments/header :: nav_header" />
+
+</div>
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-12 blog-main">
+
+            <h3 class="pb-4 mb-4 font-italic border-bottom">
+                Updates from MyStage
+            </h3>
+
+            <div class="blog-post">
+                <h2 class="blog-post-title">Write</h2>
+
+                <div>
+
+                    <form action="/write" th:action="@{/write}" th:object="${post}" method="post">
+                        <p>
+                            Title: <input type="text" th:field="*{title}">
+                        </p>
+                        <p>
+                            <textarea th:field="*{body}" type="text" class="textarea" placeholder="Enter text ..." style="width: 100%; height: 200px">
+
+                            </textarea>
+                        </p>
+                        <p>
+                            <input type="submit" value="Submit"/> <input type="reset" value="Reset">
+                        </p>
+                    </form>
+
+                </div>
+
+            </div><!-- /.blog-post -->
+
+            <nav class="blog-pagination">
+                <a class="btn btn-outline-primary" href="#">Older</a>
+                <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
+            </nav>
+
+        </div><!-- /.blog-main -->
+
+    </div><!-- /.row -->
+
+</main><!-- /.container -->
+
+<footer th:replace="fragments/footer :: footerFragment">
+</footer>
+</body>
+</html>
