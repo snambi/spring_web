@@ -35,7 +35,7 @@ public class HomeController {
         return "status";
     }
 
-    @GetMapping("/signin")
+    @GetMapping("/login")
     public String  signin(){
         return "signin";
     }

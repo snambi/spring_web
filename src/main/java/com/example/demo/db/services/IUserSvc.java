@@ -12,6 +12,7 @@ public interface IUserSvc extends JpaRepository<User, Long> {
     Optional<User> findById(Long aLong);
 
     List<User> findByStatus(String Status);
+
 }
 
 
