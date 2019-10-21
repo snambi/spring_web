@@ -15,7 +15,7 @@ public class HomeController {
     @Inject
     private IPostSvc iPostSvc;
 
-    @GetMapping("/")
+    @GetMapping( value = {"/", "/home"})
     public String home( Model model ){
 
         model.addAttribute("active", 66);
@@ -33,11 +33,6 @@ public class HomeController {
         model.addAttribute("error", 443);
 
         return "status";
-    }
-
-    @GetMapping("/login")
-    public String  signin(){
-        return "signin";
     }
 
     @GetMapping("/write")
