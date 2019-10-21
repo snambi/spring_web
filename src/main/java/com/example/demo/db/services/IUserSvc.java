@@ -16,6 +16,8 @@ public interface IUserSvc extends JpaRepository<User, Long> {
 
     //@Query("SELECT u from User u where u.email = ?1")
     List<User> findByEmail( String email );
+
+
 }
 
 
