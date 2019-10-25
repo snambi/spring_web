@@ -2,18 +2,26 @@ package com.example.demo.services;
 
 import com.example.demo.db.services.IUserSvc;
 import com.example.demo.entities.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsPasswordService;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 @Component
-public class LoginService {
+public class LoginService implements UserDetailsService, UserDetailsPasswordService {
 
     @Inject
     IUserSvc userSvc;
+
+
 
     public boolean checkPassword( String login, String password ){
 
@@ -21,7 +29,9 @@ public class LoginService {
 
         List<User> users = userSvc.findByEmail(login);
 
-        if( users.get(0).getPassword().equals(password) ) {
+        if( users != null &&
+                users.size()> 0 &&
+                users.get(0).getPassword().equals(password) ) {
             result = true;
         }
 
@@ -37,5 +47,25 @@ public class LoginService {
 
         User user1 = userSvc.saveAndFlush(user);
         return user1;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        org.springframework.security.core.userdetails.User userdetails = null;
+        User user = userSvc.findByUserName(username);
+
+        if( user != null  ){
+            userdetails =new org.springframework.security.core.userdetails.User( user.getUserName(), user.getPassword(), new ArrayList<>());
+        }else{
+            throw new UsernameNotFoundException("User not found:  " + username);
+        }
+
+        return userdetails;
+    }
+
+    @Override
+    public UserDetails updatePassword(UserDetails user, String newPassword) {
+        return null;
     }
 }

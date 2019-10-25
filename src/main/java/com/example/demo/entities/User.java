@@ -3,14 +3,14 @@ package com.example.demo.entities;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity(name = "USER")
+@Entity(name = "USERS")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
 
-    @Column(name = "USER_NAME")
+    @Column(name = "USERNAME", nullable = false, unique = true)
     private String userName;
 
     @Column(name = "PASSWORD")
@@ -21,6 +21,9 @@ public class User {
 
     @Column( name = "STATUS")
     private String status;
+
+    @Column( name = "ENABLED")
+    private boolean enabled = true;
 
     @Column( name = "CREATED_BY")
     private String createdBy;
@@ -83,6 +86,14 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getCreatedBy() {

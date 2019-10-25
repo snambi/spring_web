@@ -2,6 +2,7 @@ package com.example.demo.web;
 
 import com.example.demo.entities.User;
 import com.example.demo.services.LoginService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,9 @@ public class LoginController {
     @Inject
     LoginService loginService;
 
+    @Inject
+    PasswordEncoder passwordEncoder;
+
     @GetMapping("/login")
     public String  login( Model model ){
         model.addAttribute("login", new Login());
@@ -29,7 +33,13 @@ public class LoginController {
 
         boolean result = loginService.checkPassword(login.getEmailId(), login.getPassword());
 
-        return "redirect:/home";
+        if( result == true) {
+            return "redirect:/home";
+        }else{
+            model.addAttribute("login", new Login());
+            model.addAttribute("error", "Invalid Login Id or incorrect password");
+            return "login";
+        }
     }
 
     @GetMapping("/signup")
@@ -44,7 +54,7 @@ public class LoginController {
         User user = new User();
 
         user.setEmail( signup.getEmailId() );
-        user.setPassword( signup.getPassword());
+        user.setPassword(  passwordEncoder.encode( signup.getPassword() ) );
         user.setUserName( signup.getUserName() );
 
         loginService.registerUser(user);
