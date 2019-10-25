@@ -1,15 +1,16 @@
 package com.example.demo.web;
 
-import com.example.demo.entities.User;
+import com.example.demo.data.models.User;
 import com.example.demo.services.LoginService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class LoginController {
@@ -27,13 +28,18 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String loginSubmit( Login login, Model model ){
+    public String loginSubmit( Login login, Model model, HttpServletResponse response ){
 
-        System.out.println( "email: "+ login.getEmailId() + ", password: "+ login.getPassword());
+        System.out.println( "email: "+ login.getUserName() + ", password: "+ login.getPassword());
 
-        boolean result = loginService.checkPassword(login.getEmailId(), login.getPassword());
+        boolean result = loginService.checkPassword(login.getUserName(), login.getPassword());
 
         if( result == true) {
+            // set the login cookie
+            // create a cookie
+            Cookie cookie = new Cookie("username", login.getUserName() );
+            response.addCookie(cookie);
+
             return "redirect:/home";
         }else{
             model.addAttribute("login", new Login());
@@ -97,18 +103,18 @@ public class LoginController {
 
     public static class Login{
 
-        private String emailId;
+        private String userName;
         private String password;
 
         public Login() {
         }
 
-        public String getEmailId() {
-            return emailId;
+        public String getUserName() {
+            return userName;
         }
 
-        public void setEmailId(String emailId) {
-            this.emailId = emailId;
+        public void setUserName(String userName) {
+            this.userName = userName;
         }
 
         public String getPassword() {

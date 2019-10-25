@@ -1,12 +1,11 @@
 package com.example.demo.services;
 
-import com.example.demo.db.services.IUserSvc;
-import com.example.demo.entities.User;
+import com.example.demo.data.services.IUserSvc;
+import com.example.demo.data.models.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsPasswordService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.rest;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

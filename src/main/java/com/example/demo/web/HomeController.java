@@ -1,7 +1,7 @@
 package com.example.demo.web;
 
-import com.example.demo.db.services.IPostSvc;
-import com.example.demo.entities.Post;
+import com.example.demo.data.services.IPostSvc;
+import com.example.demo.data.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

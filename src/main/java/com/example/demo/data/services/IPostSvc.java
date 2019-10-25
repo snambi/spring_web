@@ -1,6 +1,6 @@
-package com.example.demo.db.services;
+package com.example.demo.data.services;
 
-import com.example.demo.entities.Post;
+import com.example.demo.data.models.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IPostSvc extends JpaRepository<Post, Long> {

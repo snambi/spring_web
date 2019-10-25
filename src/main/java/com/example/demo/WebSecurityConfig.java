@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -40,10 +41,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .jdbcAuthentication()
         .dataSource( dataSource )
         .passwordEncoder( encoder());
-//        auth.inMemoryAuthentication()
-//            .withUser("user").password("password").roles("USER")
-//            .and()
-//            .withUser("admin").password("{noop}admin").roles("USER", "ADMIN");
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+            .antMatchers("/resources/**");
     }
 
     @Override
@@ -53,31 +56,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/home", "/login", "/signup", "/css/*", "/js/*", "/bootstrap-4.3.1/css/*",  "/bootstrap-4.3.1/js/*" ).permitAll()
                 .anyRequest().authenticated()
                 .and()
+
+            // Login Configuration
             .formLogin()
                 .loginPage("/login")
-                .usernameParameter("emailId")
+                .usernameParameter("userName")
                 .permitAll()
                 .and()
+
+            //remember me configuration
+            .rememberMe()
+                .key("login-key")
+                .rememberMeParameter("login-value")
+                .rememberMeCookieName("mydata-login")
+                .tokenValiditySeconds(86400)
+                .and()
+
             .logout()
                 .permitAll();
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
-
-//        User.UserBuilder userBuilder = User.withDefaultPasswordEncoder();
-//
-//        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        manager.createUser(userBuilder.username("user").password( "password").roles("USER").build());
-//        manager.createUser(userBuilder.username("ss@gg").password( "test" ).roles("USER").build());
-//        manager.createUser(userBuilder.username("admin").password( "password" ).roles("USER", "ADMIN").build());
-//
-//        return manager;
-
         return loginService;
-
     }
 
     @Bean
