@@ -2,7 +2,10 @@ package com.example.demo.web;
 
 import com.example.demo.data.models.User;
 import com.example.demo.services.LoginService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
@@ -21,31 +25,25 @@ public class LoginController {
     @Inject
     PasswordEncoder passwordEncoder;
 
+    /**
+     * login page is created by the following method
+     *
+     * post login processing is handled by <code>AuthenticationSuccessHandlerImpl</code>
+     *
+     */
     @GetMapping("/login")
     public String  login( Model model ){
         model.addAttribute("login", new Login());
         return "login";
     }
 
-    @PostMapping("/login")
-    public String loginSubmit( Login login, Model model, HttpServletResponse response ){
-
-        System.out.println( "email: "+ login.getUserName() + ", password: "+ login.getPassword());
-
-        boolean result = loginService.checkPassword(login.getUserName(), login.getPassword());
-
-        if( result == true) {
-            // set the login cookie
-            // create a cookie
-            Cookie cookie = new Cookie("username", login.getUserName() );
-            response.addCookie(cookie);
-
-            return "redirect:/home";
-        }else{
-            model.addAttribute("login", new Login());
-            model.addAttribute("error", "Invalid Login Id or incorrect password");
-            return "login";
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
         }
+        return "redirect:/";
     }
 
     @GetMapping("/signup")

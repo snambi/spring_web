@@ -51,7 +51,11 @@
                 <a class="nav-link active" href="/">Home</a>
                 <a class="nav-link" href="/mydata">My Data</a>
                 <a class="nav-link" href="/login">Login</a>
+                <form class="j" th:formmethod="get" th:action="@{/logout}">
+                    <button class="btn btn-outline-danger my-2 my-sm-2 btn-sm" type="submit">Logout</button>
+                </form>
             </nav>
+
         </div>
     </header>
 
