@@ -17,7 +17,7 @@ import java.io.IOException;
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-    static final String SAVED_REQUEST = "SPRING_SECURITY_SAVED_REQUEST";
+    private static final String SAVED_REQUEST = "SPRING_SECURITY_SAVED_REQUEST";
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,

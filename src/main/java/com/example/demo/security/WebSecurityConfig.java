@@ -106,4 +106,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
+    @Bean("sample_text")
+    public String doSomething() {
+        return "hello world";
+    }
 }
