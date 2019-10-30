@@ -26,8 +26,8 @@ public class HomeController {
 
         String viewname = null;
 
-        if( userLoggedin.isLoggedin(request) ){
-            viewname = "home-landing";
+        if( userLoggedin.hasLoggedInBefore(request) ){
+            viewname = "home";
         }else{
             viewname = "home-landing";
         }
