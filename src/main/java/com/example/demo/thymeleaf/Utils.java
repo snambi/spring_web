@@ -48,5 +48,25 @@ public class Utils {
 
             return isLoggedin;
         }
+
+
+        public boolean hasLoggedInBefore( HttpServletRequest request ){
+
+            boolean result = isLoggedin(request);
+
+            // check whether the usernme cookie is present
+            if( result == false ){
+
+                if( request.getCookies() != null ){
+                    for( Cookie cookie : request.getCookies() ){
+                        if( cookie.getName().equals("username")){
+                            result = true;
+                        }
+                    }
+                }
+           }
+
+            return result;
+        }
     }
 }

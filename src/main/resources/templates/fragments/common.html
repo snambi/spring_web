@@ -35,19 +35,28 @@
             }
         }
     </style>
-    <!-- Custom styles for this template -->
-    <link href="/css/home-landing.css" rel="stylesheet" />
+
+        <!-- Custom styles for this template -->
+    <th:block th:if="${@UserLoggedin.hasLoggedInBefore( #request ) == true}">
+        <link href="/css/common.css" rel="stylesheet" />
+    </th:block>
+    <th:block th:if="${@UserLoggedin.hasLoggedInBefore( #request ) == false}">
+        <link href="/css/home-landing.css" rel="stylesheet" />
+    </th:block>
 
 </head>
+
 <body class="text-center">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 
 
     <header class="masthead mb-auto" th:fragment="top-navigation">
         <div class="inner">
-            <h3 class="masthead-brand">Test</h3>
+            <h3 class="masthead-brand">
+                <a class="" href="/">TEST</a>
+            </h3>
             <nav class="nav nav-masthead justify-content-center align-middle">
-                <a class="nav-link active" href="/">Home</a>
+                <a class="nav-link " href="/">Home</a>
                 <a class="nav-link" href="/mydata">My Data</a>
 
                 <span class="nav-link" th:if="${@UserLoggedin.isLoggedin( #request ) == false}">
@@ -71,7 +80,7 @@
 
     <footer class="mastfoot mt-auto" th:fragment="footer">
         <div class="inner">
-            <p>TEST provided by <a href="https://www.ebay.com/">eBay</a>, by <a href="https://twitter.com/nams">@nams</a>.</p>
+            <p>TEST provided by <a href="https://twitter.com/nams">@nams</a>.</p>
         </div>
     </footer>
 </div>
