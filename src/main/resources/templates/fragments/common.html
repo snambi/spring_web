@@ -47,13 +47,22 @@
     <header class="masthead mb-auto" th:fragment="top-navigation">
         <div class="inner">
             <h3 class="masthead-brand">Test</h3>
-            <nav class="nav nav-masthead justify-content-center">
+            <nav class="nav nav-masthead justify-content-center align-middle">
                 <a class="nav-link active" href="/">Home</a>
                 <a class="nav-link" href="/mydata">My Data</a>
-                <a class="nav-link" href="/login">Login</a>
-                <form class="j" th:formmethod="get" th:action="@{/logout}">
-                    <button class="btn btn-outline-danger my-2 my-sm-2 btn-sm" type="submit">Logout</button>
-                </form>
+
+                <span class="nav-link" th:if="${@UserLoggedin.isLoggedin( #request ) == false}">
+                    <form class="j" th:formmethod="get" th:action="@{/login}">
+
+                        <button class="btn btn-primary btn-sm" type="submit">Login</button>
+                    </form>
+                </span>
+
+                <span class="nav-link" th:if="${@UserLoggedin.isLoggedin( #request ) == true}">
+                     <form class="j" th:formmethod="get" th:action="@{/logout}">
+                        <button class="btn btn-success btn-sm" type="submit">Logout</button>
+                    </form>
+                </span>
             </nav>
 
         </div>
