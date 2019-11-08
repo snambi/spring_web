@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+
+
+    <div class="row">
+        <div id="title">
+            <h1>News Items</h1>
+        </div>
+        <table id="newItems" class="table table-striped">
+            <thead>
+            <tr>
+                <th width="70%">Headline</th>
+                <th>Tags</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="result" th:each="n : ${items}">
+                <td th:text="${n.headline}"></td>
+                <td th:text="${n.tags}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>
+</body>
+</html>

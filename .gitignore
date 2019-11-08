@@ -3,6 +3,9 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+### LocalHost SSL certificate ###
+/localhost+2.p12
+
 ### STS ###
 .apt_generated
 .classpath
@@ -28,3 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
+
