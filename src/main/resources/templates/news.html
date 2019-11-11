@@ -23,9 +23,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="result" th:each="n : ${items}">
-                <td th:text="${n.headline}"></td>
-                <td th:text="${n.tags}"></td>
+            <tr class="result" data-th-each="n : ${items}">
+                <td th:text="${n.getHeadline()}"></td>
+                <td th:text="${n.getTags()}"></td>
             </tr>
             </tbody>
         </table>

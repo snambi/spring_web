@@ -4,6 +4,7 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.util.List;
 
+
 public class News {
 
     // fields related to the news item

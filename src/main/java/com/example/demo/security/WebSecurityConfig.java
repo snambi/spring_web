@@ -50,11 +50,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+
         http.authorizeRequests()
-                .antMatchers("/", "/home", "/login", "/test", "/news", "/signup", "/css/*", "/js/*", "/bootstrap-4.3.1/css/*",  "/bootstrap-4.3.1/js/*" )
+                .antMatchers("/", "/home", "/login", "/test", "/news", "/signup",
+                        "/css/*", "/js/*",
+                        "/bootstrap-4.3.1/css/*",  "/bootstrap-4.3.1/js/*" )
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
+
 
             // Login Configuration
             .formLogin()
@@ -63,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler( myAuthenticationSuccessHandler() )
                 .permitAll()
                 .and()
+
 
             //remember me configuration
             .rememberMe()
