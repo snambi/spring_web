@@ -8,7 +8,7 @@ public class UserResource {
 
     // This method is called if TEXT_PLAIN is request
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String sayPlainTextHello() {
         return "Hello Jersey";
     }
