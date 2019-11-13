@@ -62,6 +62,7 @@ drop table if exists NEWS;
 CREATE TABLE NEWS(
     NEWS_ID bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'Auto generated id for a News Story',
     HEADLINE varchar(255) NOT NULL COMMENT 'Headline of the news',
+    DESCRIPTION varchar(700) NOT NULL COMMENT 'Description of the news item',
     URL varchar(512) DEFAULT NULL COMMENT '',
     PUBLISHED_DATE timestamp NULL DEFAULT NULL COMMENT '',
     VOTES int(11) DEFAULT NULL COMMENT '',

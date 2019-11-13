@@ -23,7 +23,7 @@ public class NewsController {
 
         Optional<News> news = iNewsSvc.findById(id);
 
-        if (news == null ) {
+        if (news == null || !news.isPresent()) {
             return ResponseEntity.notFound().build();
         } else {
             return ResponseEntity.ok(news.get());

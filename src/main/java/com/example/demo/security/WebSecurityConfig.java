@@ -3,6 +3,7 @@ package com.example.demo.security;
 import com.example.demo.services.LoginService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -56,9 +57,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/css/*", "/js/*",
                         "/bootstrap-4.3.1/css/*",  "/bootstrap-4.3.1/js/*" )
                 .permitAll()
+
+
                 .anyRequest().authenticated()
                 .and()
 
+            // enable REST Apis with different level of authentication
+            .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/api/v1/news")
+                .permitAll()
+                .and()
 
             // Login Configuration
             .formLogin()
