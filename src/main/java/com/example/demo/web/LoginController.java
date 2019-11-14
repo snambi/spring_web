@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,14 +37,23 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/";
-    }
+//    @GetMapping("/logout")
+//    public String logout(HttpServletRequest request, HttpServletResponse response){
+//
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        if (auth != null){
+//            new SecurityContextLogoutHandler().logout(request, response, auth);
+//        }
+//
+//        // delete all the cookies
+//        Cookie[] cookies = request.getCookies();
+//        for( Cookie cookie : cookies ){
+//            cookie.setMaxAge(0);
+//            response.addCookie(cookie);
+//        }
+//
+//        return "redirect:/";
+//    }
 
     @GetMapping("/signup")
     public String signup( Model model ){
