@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.List;
@@ -21,7 +18,8 @@ import java.util.List;
 public class News {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column( name = "NEWS_ID")
     private long newsId;
 
     // fields related to the news item

@@ -51,22 +51,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-
-        http.authorizeRequests()
-                .antMatchers("/", "/home", "/login", "/test", "/news", "/signup",
-                        "/css/*", "/js/*",
-                        "/bootstrap-4.3.1/css/*",  "/bootstrap-4.3.1/js/*" )
-                .permitAll()
-
-
-                .anyRequest().authenticated()
+        // enable REST Apis with different level of authentication
+        http
+            .httpBasic().disable()
+            .csrf().disable()
+            .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/api/v1/news/*").anonymous()
+                .antMatchers(HttpMethod.POST, "/api/v1/news").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/news/*").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/v1/news/*").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/v1/news/*").permitAll()
                 .and()
+
 
             // enable REST Apis with different level of authentication
             .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/v1/news")
+                .antMatchers( "/", "/home", "/login", "/test", "/news", "/signup",
+                        "/css/*", "/js/*",
+                        "/bootstrap-4.3.1/css/*",  "/bootstrap-4.3.1/js/*" )
                 .permitAll()
+                .anyRequest().authenticated()
                 .and()
+
 
             // Login Configuration
             .formLogin()

@@ -3,15 +3,19 @@ package com.example.demo.rest;
 import com.example.demo.data.models.News;
 import com.example.demo.data.services.INewsSvc;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Optional;
 
 @RestController
+@Validated
 @RequestMapping("/api/v1/news")
 public class NewsController {
 
@@ -32,6 +36,10 @@ public class NewsController {
 
     @PostMapping("/")
     public ResponseEntity<News> create( @RequestBody News news )throws URISyntaxException {
+
+        Timestamp timestamp = new Timestamp(Calendar.getInstance().getTime().getTime());
+        news.setCreatedTime(timestamp);
+
 
         News saved = iNewsSvc.saveAndFlush(news);
         if (saved == null) {
