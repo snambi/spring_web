@@ -1,4 +1,4 @@
-package com.example.demo.services;
+package com.example.demo.services.impl;
 
 import com.example.demo.data.services.IUserSvc;
 import com.example.demo.data.models.User;
@@ -20,6 +20,25 @@ public class LoginService implements UserDetailsService, UserDetailsPasswordServ
     @Inject
     IUserSvc userSvc;
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        org.springframework.security.core.userdetails.User userdetails = null;
+        User user = userSvc.findByUserName(username);
+
+        if( user != null  ){
+            userdetails =new org.springframework.security.core.userdetails.User( user.getUserName(), user.getPassword(), new ArrayList<>());
+        }else{
+            throw new UsernameNotFoundException("User not found:  " + username);
+        }
+
+        return userdetails;
+    }
+
+    @Override
+    public UserDetails updatePassword(UserDetails user, String newPassword) {
+        return null;
+    }
 
 
     public boolean checkPassword( String login, String password ){
@@ -46,25 +65,5 @@ public class LoginService implements UserDetailsService, UserDetailsPasswordServ
 
         User user1 = userSvc.saveAndFlush(user);
         return user1;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        org.springframework.security.core.userdetails.User userdetails = null;
-        User user = userSvc.findByUserName(username);
-
-        if( user != null  ){
-            userdetails =new org.springframework.security.core.userdetails.User( user.getUserName(), user.getPassword(), new ArrayList<>());
-        }else{
-            throw new UsernameNotFoundException("User not found:  " + username);
-        }
-
-        return userdetails;
-    }
-
-    @Override
-    public UserDetails updatePassword(UserDetails user, String newPassword) {
-        return null;
     }
 }

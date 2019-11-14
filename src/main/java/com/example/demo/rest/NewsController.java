@@ -2,6 +2,7 @@ package com.example.demo.rest;
 
 import com.example.demo.data.models.News;
 import com.example.demo.data.services.INewsSvc;
+import com.example.demo.services.INewsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +23,13 @@ public class NewsController {
     @Inject
     INewsSvc iNewsSvc;
 
+    @Inject
+    INewsService newsService;
+
     @GetMapping("/{id}")
     public ResponseEntity<News> get(@PathVariable Long id ){
 
-        Optional<News> news = iNewsSvc.findById(id);
+        Optional<News> news = newsService.get(id);
 
         if (news == null || !news.isPresent()) {
             return ResponseEntity.notFound().build();
@@ -37,11 +41,8 @@ public class NewsController {
     @PostMapping("/")
     public ResponseEntity<News> create( @RequestBody News news )throws URISyntaxException {
 
-        Timestamp timestamp = new Timestamp(Calendar.getInstance().getTime().getTime());
-        news.setCreatedTime(timestamp);
+        News saved = newsService.create(news);
 
-
-        News saved = iNewsSvc.saveAndFlush(news);
         if (saved == null) {
             return ResponseEntity.notFound().build();
         } else {
@@ -51,14 +52,19 @@ public class NewsController {
                     .toUri();
 
             return ResponseEntity.created(uri)
-                                    .body(saved);
+                                 .body(saved);
         }
     }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public ResponseEntity<News> update( @RequestBody News news , @PathVariable Long id ){
 
-        News updatedNews = iNewsSvc.saveAndFlush(news);
+        // error when the ID and the payload doesn't match
+        if( id != news.getNewsId() ){
+            return ResponseEntity.notFound().build();
+        }
+
+        News updatedNews = newsService.update(news);
 
         if (updatedNews == null) {
             return ResponseEntity.notFound().build();
@@ -67,12 +73,10 @@ public class NewsController {
         }
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<News> delete( @PathVariable Long id ){
 
-        News n = new News();
-        n.setNewsId(id);
-        iNewsSvc.delete( n );
+        newsService.delete(id);
 
         return ResponseEntity.noContent().build();
     }
