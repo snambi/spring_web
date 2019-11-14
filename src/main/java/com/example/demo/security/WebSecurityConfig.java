@@ -65,9 +65,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
             // enable REST Apis with different level of authentication
+
+                //"**/swagger-resources/**", "/v2/api-docs", "/webjars/**",
             .authorizeRequests()
                 .antMatchers( "/", "/home", "/login", "/test", "/news", "/signup",
                         "/css/*", "/js/*",
+                        "/swagger-ui.html*", "/webjars/**", "/swagger-resources/**", "/v2/api-docs",
                         "/bootstrap-4.3.1/css/*",  "/bootstrap-4.3.1/js/*" )
                 .permitAll()
                 .anyRequest().authenticated()
