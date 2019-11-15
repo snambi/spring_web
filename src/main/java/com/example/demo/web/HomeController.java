@@ -2,6 +2,7 @@ package com.example.demo.web;
 
 import com.example.demo.data.models.Post;
 import com.example.demo.data.services.IPostSvc;
+import com.example.demo.services.INewsService;
 import com.example.demo.thymeleaf.Utils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,9 @@ public class HomeController {
 
     @Inject
     private IPostSvc iPostSvc;
+
+    @Inject
+    private INewsService newsService;
 
     @Inject
     private Utils.UserLoggedin userLoggedin;
