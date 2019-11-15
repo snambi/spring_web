@@ -53,6 +53,15 @@
 		</dependency>
 
 
+		<!--	RSS reader library	-->
+		<dependency>
+			<groupId>com.apptastic</groupId>
+			<artifactId>rssreader</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+
+
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -60,6 +69,7 @@
 		</dependency>
 
 
+		<!-- Swagger dependencies -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -113,4 +123,11 @@
 		</plugins>
 	</build>
 
+
+	<repositories>
+		<repository>
+			<id>jcenter</id>
+			<url>https://jcenter.bintray.com</url>
+		</repository>
+	</repositories>
 </project>
