@@ -3,23 +3,21 @@ package com.example.demo.thymeleaf;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextImpl;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Enumeration;
 
 @Configuration
 public class Utils {
 
-    @Bean("UserLoggedin")
-    public UserLoggedin getUserLoggedin(){
-        return new UserLoggedin();
+    @Bean("ThymeLeafUtils")
+    public ThymeLeafUtils getUserLoggedin(){
+        return new ThymeLeafUtils();
     }
 
-    public static class UserLoggedin{
+    public static class ThymeLeafUtils {
 
         public boolean isLoggedin( HttpServletRequest request ){
 

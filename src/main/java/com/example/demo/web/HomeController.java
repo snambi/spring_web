@@ -25,14 +25,14 @@ public class HomeController {
     private INewsService newsService;
 
     @Inject
-    private Utils.UserLoggedin userLoggedin;
+    private Utils.ThymeLeafUtils thymeLeafUtils;
 
     @GetMapping( value = {"/", "/home"})
     public String home(Model model, HttpServletRequest request ){
 
         String viewname = null;
 
-        if( userLoggedin.hasLoggedInBefore(request) ){
+        if( thymeLeafUtils.hasLoggedInBefore(request) ){
             viewname = "home";
         }else{
             viewname = "home-landing";
@@ -51,7 +51,6 @@ public class HomeController {
 
     @GetMapping( value = {"/news_flux"})
     public String news_flux(Model model){
-
         return "news";
     }
 

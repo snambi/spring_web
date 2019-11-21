@@ -2,14 +2,14 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<head th:replace="fragments/common :: main-header">
 </head>
 
 <body class="text-center">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 
-
+    <header class="masthead mb-auto" th:replace="fragments/common :: top-navigation">
+    </header>
 
     <div class="row">
         <div id="title">
@@ -31,8 +31,8 @@
         </table>
     </div>
 
-
-
+    <footer class="mastfoot mt-auto" th:replace="fragments/common :: footer">
+    </footer>
 </div>
 </body>
 </html>

@@ -38,10 +38,10 @@
     </style>
 
         <!-- Custom styles for this template -->
-    <th:block th:if="${@UserLoggedin.hasLoggedInBefore( #request ) == true}">
+    <th:block th:if="${@ThymeLeafUtils.hasLoggedInBefore( #request ) == true}">
         <link href="/css/common.css" rel="stylesheet" />
     </th:block>
-    <th:block th:if="${@UserLoggedin.hasLoggedInBefore( #request ) == false}">
+    <th:block th:if="${@ThymeLeafUtils.hasLoggedInBefore( #request ) == false}">
         <link href="/css/home-landing.css" rel="stylesheet" />
     </th:block>
 
@@ -60,14 +60,14 @@
                 <a class="nav-link " href="/">Home</a>
                 <a class="nav-link" href="/mydata">My Data</a>
 
-                <span class="nav-link" th:if="${@UserLoggedin.isLoggedin( #request ) == false}">
+                <span class="nav-link" th:if="${@ThymeLeafUtils.isLoggedin( #request ) == false}">
                     <form class="j" th:formmethod="get" th:action="@{/login}">
 
                         <button class="btn btn-primary btn-sm" type="submit">Login</button>
                     </form>
                 </span>
 
-                <span class="nav-link" th:if="${@UserLoggedin.isLoggedin( #request ) == true}">
+                <span class="nav-link" th:if="${@ThymeLeafUtils.isLoggedin( #request ) == true}">
                      <form class="j" th:formmethod="get" th:action="@{/logout}">
                         <button class="btn btn-success btn-sm" type="submit">Logout</button>
                     </form>
