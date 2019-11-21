@@ -48,6 +48,45 @@ public class Utils {
         }
 
 
+        public boolean isLandingPageAndLoggedin(  HttpServletRequest request ){
+
+            boolean result = false;
+
+            if( isLoggedin( request) &&
+                isHomePage(request )){
+                result = true;
+            }
+
+            return result;
+        }
+
+        public boolean isLandingPageAndNotLoggedIn( HttpServletRequest request  ){
+            boolean result = false;
+
+            if( isHomePage(request) &&
+                    !isLoggedin(request)){
+                result = true;
+            }
+
+            return result;
+        }
+
+        public boolean isHomePage(  HttpServletRequest request ){
+
+            boolean result = false;
+            if( request != null ){
+
+                if( request.getRequestURI().equalsIgnoreCase("/") ||
+                        request.getRequestURI().equals("")){
+
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
+
         public boolean hasLoggedInBefore( HttpServletRequest request ){
 
             boolean result = isLoggedin(request);

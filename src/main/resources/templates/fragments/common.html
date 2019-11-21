@@ -37,12 +37,13 @@
         }
     </style>
 
-        <!-- Custom styles for this template -->
-    <th:block th:if="${@ThymeLeafUtils.hasLoggedInBefore( #request ) == true}">
-        <link href="/css/common.css" rel="stylesheet" />
-    </th:block>
-    <th:block th:if="${@ThymeLeafUtils.hasLoggedInBefore( #request ) == false}">
+
+    <!-- Custom styles for this template -->
+    <th:block th:if="${@ThymeLeafUtils.isLandingPageAndNotLoggedIn( #request ) == true}">
         <link href="/css/home-landing.css" rel="stylesheet" />
+    </th:block>
+    <th:block th:if="${@ThymeLeafUtils.isLandingPageAndNotLoggedIn( #request ) == false}">
+        <link href="/css/common.css" rel="stylesheet" />
     </th:block>
 
 </head>
