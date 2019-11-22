@@ -13,6 +13,7 @@ CREATE TABLE USERS (
   PRIMARY KEY (USER_ID) USING HASH
 );
 
+/* This table is not used */
 drop table if exists AUTHORITIES;
 CREATE TABLE AUTHORITIES (
     USERNAME varchar(255) not null,
@@ -22,6 +23,19 @@ CREATE TABLE AUTHORITIES (
     UPDATED_TIME timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 create unique index idx_auth_username on authorities (username,authority);
+
+drop table if exists ROLE;
+CREATE TABLE ROLE(
+    ID bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'Auto generated id for a user+role combination',
+    USER_NAME varchar(255) not null,
+    ROLE varchar(50) not null,
+    CREATED_BY varchar(255) DEFAULT NULL,
+    CREATED_TIME timestamp NULL DEFAULT NULL,
+    UPDATED_TIME timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (ID) USING HASH
+);
+create unique index idx_username_role on ROLE (USER_NAME, ROLE);
+
 
 CREATE TABLE SPRING_SESSION (
 	PRIMARY_ID CHAR(36) NOT NULL,
