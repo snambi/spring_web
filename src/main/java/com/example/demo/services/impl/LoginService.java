@@ -84,6 +84,8 @@ public class LoginService implements UserDetailsService, UserDetailsPasswordServ
         Role role = new Role();
         role.setRole(RoleEnum.ROLE_USER.name());
         role.setUserName(user1.getUserName());
+        role.setCreatedBy("Web");
+        role.setCreatedTime(currentTime);
 
         roleSvc.saveAndFlush( role );
 
