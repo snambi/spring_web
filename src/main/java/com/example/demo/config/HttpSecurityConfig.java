@@ -87,6 +87,7 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-ui.html*", "/webjars/**", "/swagger-resources/**", "/v2/api-docs",
                         "/bootstrap-4.3.1/css/*",  "/bootstrap-4.3.1/js/*" )
                 .permitAll()
+                .antMatchers("/vote").hasRole("MODERATOR")
                 .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -122,7 +123,7 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public RoleHierarchy roleHierarchy() {
         RoleHierarchyImpl r = new RoleHierarchyImpl();
-        r.setHierarchy(" ROLE_ADMIN > ROLE_STAFF and ROLE_STAFF > ROLE_MODERATOR and ROLE_MODERATOR > ROLE_USER");
+        r.setHierarchy("ROLE_ADMIN > ROLE_STAFF > ROLE_MODERATOR > ROLE_USER");
         return r;
     }
 

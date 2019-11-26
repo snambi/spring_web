@@ -3,7 +3,7 @@ package com.example.demo.security;
 public enum RoleEnum {
     ROLE_USER("USER"),
     ROLE_MODERATOR("MODERATOR"),
-    ROLE_STAFF("ROLE_STAFF"),
+    ROLE_STAFF("STAFF"),
     ROLE_ADMIN("ADMIN"),
 
     ROLE_API_USER("API_USER"),

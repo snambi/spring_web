@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -26,6 +27,7 @@ public class LoginService implements UserDetailsService, UserDetailsPasswordServ
     @Inject
     IRoleSvc roleSvc;
 
+    @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -80,6 +82,7 @@ public class LoginService implements UserDetailsService, UserDetailsPasswordServ
         return authorities;
     }
 
+    @Transactional
     @Override
     public UserDetails updatePassword(UserDetails user, String newPassword) {
         return null;
@@ -101,6 +104,7 @@ public class LoginService implements UserDetailsService, UserDetailsPasswordServ
         return result;
     }
 
+    @Transactional
     public User registerUser( User user ){
 
         Timestamp currentTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
@@ -117,6 +121,7 @@ public class LoginService implements UserDetailsService, UserDetailsPasswordServ
         role.setUserName(user1.getUserName());
         role.setCreatedBy("Web");
         role.setCreatedTime(currentTime);
+        role.setUpdatedTime(currentTime);
 
         roleSvc.saveAndFlush( role );
 
