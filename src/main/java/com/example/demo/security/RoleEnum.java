@@ -2,7 +2,13 @@ package com.example.demo.security;
 
 public enum RoleEnum {
     ROLE_USER("USER"),
-    ROLE_ADMIN("ADMIN");
+    ROLE_MODERATOR("MODERATOR"),
+    ROLE_STAFF("ROLE_STAFF"),
+    ROLE_ADMIN("ADMIN"),
+
+    ROLE_API_USER("API_USER"),
+    ROLE_API_MODERATOR("API_MODERATOR"),
+    ROLE_API_APPLICATION("API_APPLICATION");
 
     private String name;
 

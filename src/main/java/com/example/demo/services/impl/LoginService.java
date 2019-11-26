@@ -5,6 +5,8 @@ import com.example.demo.data.services.IRoleSvc;
 import com.example.demo.data.services.IUserSvc;
 import com.example.demo.data.models.User;
 import com.example.demo.security.RoleEnum;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsPasswordService;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,9 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class LoginService implements UserDetailsService, UserDetailsPasswordService {
@@ -35,18 +35,49 @@ public class LoginService implements UserDetailsService, UserDetailsPasswordServ
         User user = userSvc.findByUserName(username);
 
         // get the role for the user from the database
-
+        Role role = roleSvc.findByUserName(user.getUserName());
 
         // build the userdetails object.
         if( user != null  ){
-            userdetails = new org.springframework.security.core.userdetails.User( user.getUserName(), user.getPassword(), new ArrayList<>());
+            userdetails = new org.springframework.security.core.userdetails.User( user.getUserName(),
+                    user.getPassword(),
+                    true,
+                    true,
+                    true,
+                    true,
+                    getGrantedAuthorities( Arrays.asList(role.getRole()) ));
         }else{
             throw new UsernameNotFoundException("User not found:  " + username);
         }
 
-
-
         return userdetails;
+    }
+
+//    private Collection<? extends GrantedAuthority> getAuthorities( Collection<Role> roles) {
+//        return getGrantedAuthorities( getGrantedAuthorities(roles) );
+//    }
+
+//    private List<String> getPrivileges(Collection<Role> roles) {
+//
+//        List<String> privileges = new ArrayList<>();
+//
+//        List<Privilege> collection = new ArrayList<>();
+//
+//        for (Role role : roles) {
+//            collection.addAll(role.getPrivileges());
+//        }
+//        for (Privilege item : collection) {
+//            privileges.add(item.getName());
+//        }
+//        return privileges;
+//    }
+
+    private List<GrantedAuthority> getGrantedAuthorities(List<String> privileges) {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (String privilege : privileges) {
+            authorities.add(new SimpleGrantedAuthority(privilege));
+        }
+        return authorities;
     }
 
     @Override
@@ -91,4 +122,6 @@ public class LoginService implements UserDetailsService, UserDetailsPasswordServ
 
         return user1;
     }
+
+
 }

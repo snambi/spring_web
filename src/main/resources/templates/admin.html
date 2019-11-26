@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/common :: main-header">
+</head>
+
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+    <header class="masthead mb-auto" th:replace="fragments/common :: top-navigation">
+    </header>
+
+    <div class="row">
+        <div id="title">
+            <h1>Admin</h1>
+        </div>
+        <table id="newItems" class="table table-striped">
+            <thead>
+            <tr>
+                <th width="70%">Headline</th>
+                <th>Tags</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="mastfoot mt-auto" th:replace="fragments/common :: footer">
+    </footer>
+</div>
+</body>
+</html>
