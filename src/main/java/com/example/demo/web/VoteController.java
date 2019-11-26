@@ -12,4 +12,9 @@ public class VoteController {
 
         return "vote";
     }
+
+    @GetMapping("/block")
+    public String block( Model model ){
+        return "block";
+    }
 }

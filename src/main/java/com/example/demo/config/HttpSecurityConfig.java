@@ -88,6 +88,7 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/bootstrap-4.3.1/css/*",  "/bootstrap-4.3.1/js/*" )
                 .permitAll()
                 .antMatchers("/vote").hasRole("MODERATOR")
+                .antMatchers("/block").hasRole("STAFF")
                 .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
