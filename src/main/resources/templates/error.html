@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/common :: main-header">
+</head>
+
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+    <header class="masthead mb-auto" th:replace="fragments/common :: top-navigation">
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-auto align-middle">
+                <H3>Error</H3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>Http Status</td>
+                    <td>
+                        <span class="align-middle" th:text="${status}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Path</td>
+                    <td>
+                        <span class="align-middle" th:text="${path}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Error</td>
+                    <td>
+                        <span class="align-middle" th:text="${error}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Message</td>
+                    <td>
+                        <span class="align-middle" th:text="${message}"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="mastfoot mt-auto" th:replace="fragments/common :: footer">
+    </footer>
+</div>
+</body>
+</html>
