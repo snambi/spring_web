@@ -4,6 +4,12 @@
 
 * Setup Local CA and Certificate --> https://golb.hplar.ch/2019/01/spring-boot-with-tls-localhost.html
 
+# Remote debugging a java application
+
+```shell script
+java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=y -jar application.jar
+```
+
 # Generate Self-Signed SSL certificate
 ```shell script
 keytool -genkeypair -alias sample -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore selfsigned.p12 -validity 3650
