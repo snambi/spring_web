@@ -33,6 +33,9 @@ public class SampleJob implements Job {
 
         Map<String,String> NYT = new HashMap<>();
 
+        // technology
+        NYT.put("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml", "Technology");
+
         // geographical news
         NYT.put("https://rss.nytimes.com/services/xml/rss/nyt/World.xml", "World");
         NYT.put("https://rss.nytimes.com/services/xml/rss/nyt/AsiaPacific.xml", "Asia Pacific");
@@ -40,6 +43,7 @@ public class SampleJob implements Job {
         NYT.put("https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml", "Middle East");
         NYT.put("https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml", "Europe");
         NYT.put("https://rss.nytimes.com/services/xml/rss/nyt/Africa.xml", "Africa");
+
 
 
         for( String feed : NYT.keySet() ){
