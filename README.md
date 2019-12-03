@@ -27,4 +27,15 @@ Is CN=John Doe, OU=security org, O=Acme inc, L=anytown, ST=CA, C=US correct?
 
 # Use self-signed certificate for environments other than "dev"
 
-create an ```application-staging.properties``` file under ```src/main/resources``` folder 
+create an ```application-staging.properties``` file under ```src/main/resources``` folder.
+
+Add the following values into the ```application-staging.properties``` file 
+
+```properties
+server.port=443
+server.ssl.enabled=true
+server.ssl.protocol=TLS
+server.ssl.key-store=./selfsigned,p12
+server.ssl.key-store-type=PKCS12
+server.ssl.key-store-password=sample123
+```
