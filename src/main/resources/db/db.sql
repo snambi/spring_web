@@ -1,11 +1,11 @@
 /**
  * Create user
  */
-CREATE USER 'decuser'@'localhost' IDENTIFIED BY 'decuser';
-GRANT ALL PRIVILEGES ON * . * TO 'decuser'@'localhost';
+CREATE USER 'dbuser'@'localhost' IDENTIFIED BY 'dbuser';
+GRANT ALL PRIVILEGES ON * . * TO 'dbuser'@'localhost';
 
-CREATE USER 'decuser'@'*' IDENTIFIED BY 'decuser';
-GRANT ALL PRIVILEGES ON * . * TO 'decuser'@'*';
+CREATE USER 'dbuser'@'*' IDENTIFIED BY 'dbuser';
+GRANT ALL PRIVILEGES ON * . * TO 'dbuser'@'*';
 
 FLUSH PRIVILEGES;
 
@@ -13,4 +13,4 @@ FLUSH PRIVILEGES;
 /*
  * Create DATABASE
  */
-CREATE DATABASE `dec`;
+CREATE DATABASE `sample`;
