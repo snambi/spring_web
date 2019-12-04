@@ -9,6 +9,12 @@
 ```shell script
 java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=y -jar application.jar
 ```
+# Run Spring Aplplication with an active profile
+```shell script
+java -jar -Dspring.profiles.active=staging  target/demo-0.0.1-SNAPSHOT.jar
+```
+The application will take configurations from ```application.properties``` file.
+All configurations in ```application-staging.properties``` will override any configuration from the default configuration file.
 
 # Generate Self-Signed SSL certificate
 ```shell script

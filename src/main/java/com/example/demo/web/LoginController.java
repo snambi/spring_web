@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -15,6 +16,9 @@ import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Controller
 public class LoginController {
@@ -62,7 +66,12 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public String signupSubmit( Signup signup, Model model ){
+    public String signupSubmit(@Valid Signup signup, BindingResult bindingResult){
+
+
+        if( bindingResult.hasErrors() ){
+            return "signup";
+        }
 
         User user = new User();
 
@@ -76,8 +85,16 @@ public class LoginController {
     }
 
     public static class Signup{
+
+        @NotNull
         private String emailId;
+
+        @NotNull
+        @Size( min = 6, max = 128)
         private String password;
+
+        @NotNull
+        @Size( min = 6, max = 128)
         private String userName;
 
         public Signup() {
