@@ -128,5 +128,24 @@ public class LoginService implements UserDetailsService, UserDetailsPasswordServ
         return user1;
     }
 
+    public boolean isUserIdInUse( String userId ){
+        boolean result = false;
+
+        if( userSvc.findByUserName(userId) != null ){
+            result = true;
+        }
+
+        return result;
+    }
+
+    public boolean isEmilInUse( String email ){
+        boolean result = false;
+
+        if( userSvc.findByEmail(email) != null ){
+            result = true;
+        }
+
+        return result;
+    }
 
 }

@@ -9,6 +9,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -67,6 +68,29 @@ public class LoginController {
 
     @PostMapping("/signup")
     public String signupSubmit(@Valid Signup signup, BindingResult bindingResult){
+
+        // do the form validations
+        if( signup.getEmailId().isEmpty()){
+            bindingResult.addError(new FieldError("signup", "emailId","Email cannot be empty"));
+        }else{
+            if( !signup.getEmailId().contains("@") &&
+                    !signup.getEmailId().contains(".")){
+                bindingResult.addError(new FieldError("signup", "emailId","Email should be valid"));
+            }
+        }
+
+        if( signup.getPassword().isEmpty() ){
+            bindingResult.addError( new FieldError("signup", "password","Password cannot be empty"));
+        }else{
+            if( signup.getPassword().length() < 8 ){
+                bindingResult.addError(new FieldError("signup", "password","Password must be atleast 8 characters"));
+            }
+        }
+
+        // check whether the  userid is already in use?
+        if( loginService.isUserIdInUse(signup.getUserName())){
+            bindingResult.addError(new FieldError("signup", "userName", signup.getUserName() + " is already in use"));
+        }
 
 
         if( bindingResult.hasErrors() ){

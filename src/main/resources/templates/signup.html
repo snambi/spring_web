@@ -96,15 +96,15 @@
 
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="email" th:field="*{emailId}" id="inputEmail" class="form-control" placeholder="Email address" required autofocus />
-    <span th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}">Email Error</span>
+    <span class="text-danger" th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}">Email Error</span>
 
     <label for="userName" class="sr-only">User name</label>
     <input type="text" th:field="*{userName}" id="userName" class="form-control" placeholder="User name"  />
-    <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</span>
+    <span class="text-danger" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</span>
 
     <label for="inputPassword"  class="sr-only">Password</label>
     <input type="password" th:field="*{password}" id="inputPassword" class="form-control" placeholder="Password" required />
-    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
+    <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
     <!--    <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>-->
