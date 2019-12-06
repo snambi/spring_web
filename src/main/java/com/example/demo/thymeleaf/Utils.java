@@ -3,6 +3,7 @@ package com.example.demo.thymeleaf;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.web.WebAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -60,7 +61,9 @@ public class Utils {
             return result;
         }
 
+
         public boolean isLandingPageAndNotLoggedIn( HttpServletRequest request  ){
+
             boolean result = false;
 
             if( isHomePage(request) &&
@@ -69,6 +72,36 @@ public class Utils {
             }
 
             return result;
+        }
+
+
+        public boolean hasLoginFailed(  HttpServletRequest request ){
+
+            boolean result = false;
+
+            if( getLoginError(request) != null ){
+                result = true;
+            }
+
+            return result;
+        }
+
+
+        public String getLoginError( HttpServletRequest request ){
+
+            String error = null;
+
+            if( request.getSession() != null &&
+                    request.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION) != null ){
+
+                Object err = request.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+
+                if( err instanceof Throwable ){
+                    error = ((Throwable) err).getMessage();
+                }
+            }
+
+            return error;
         }
 
         public boolean isHomePage(  HttpServletRequest request ){

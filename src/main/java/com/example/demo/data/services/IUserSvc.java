@@ -11,7 +11,7 @@ public interface IUserSvc extends JpaRepository<User, Long> {
     @Override
     Optional<User> findById(Long aLong);
 
-    User findByUserName(String username);
+    Optional<User> findByUserName(String username);
 
     List<User> findByStatus(String Status);
 

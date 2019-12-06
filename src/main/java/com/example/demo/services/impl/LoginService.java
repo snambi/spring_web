@@ -34,15 +34,19 @@ public class LoginService implements UserDetailsService, UserDetailsPasswordServ
         org.springframework.security.core.userdetails.User userdetails = null;
 
         // get the user from the database
-        User user = userSvc.findByUserName(username);
+        Optional<User> user = userSvc.findByUserName(username);
 
+        User u = null;
+        if( user.isPresent() ){
+            u = user.get();
+        }
         // get the role for the user from the database
-        Role role = roleSvc.findByUserName(user.getUserName());
+        Role role = roleSvc.findByUserName( u.getUserName());
 
         // build the userdetails object.
         if( user != null  ){
-            userdetails = new org.springframework.security.core.userdetails.User( user.getUserName(),
-                    user.getPassword(),
+            userdetails = new org.springframework.security.core.userdetails.User( u.getUserName(),
+                    u.getPassword(),
                     true,
                     true,
                     true,

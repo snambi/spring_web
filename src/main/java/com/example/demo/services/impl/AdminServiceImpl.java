@@ -10,6 +10,7 @@ import com.example.demo.services.IAdminService;
 import javax.inject.Inject;
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Optional;
 
 public class AdminServiceImpl implements IAdminService {
 
@@ -23,12 +24,17 @@ public class AdminServiceImpl implements IAdminService {
     public void upgradeToModerator(User user) {
 
         // get the user
-        User u = userSvc.findByUserName(user.getUserName());
+        Optional<User> u = userSvc.findByUserName(user.getUserName());
 
         // update the role
         Role role = new Role();
 
-        role.setUserName(u.getUserName());
+        User t = null;
+        if( u.isPresent()){
+            t = u.get();
+        }
+
+        role.setUserName(t.getUserName());
         role.setRole(RoleEnum.ROLE_MODERATOR.name());
         role.setCreatedBy("Web");
 
